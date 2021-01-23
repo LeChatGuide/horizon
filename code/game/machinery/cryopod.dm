@@ -98,7 +98,7 @@
 			updateUsrDialog()
 			return
 
-		var/obj/item/I = input(user, "Please choose which object to retrieve.","Object recovery",null) as null|anything in frozen_items
+		var/obj/item/I = tgui_input_list(user, "Please choose which object to retrieve.","Object recovery", frozen_items)
 		playsound(src, "terminal_type", 25, 0)
 		if(!I)
 			return

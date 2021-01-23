@@ -17,7 +17,7 @@
 		var/character_option = alert("Which character?","IC Quick Spawn","Selected Character","Randomly Created", "Cancel")
 		if (character_option == "Cancel")
 			return
-		var/initial_outfits = input("Select outfit", "Quick Dress") as null|anything in outfits
+		var/initial_outfits = tgui_input_list("Select outfit", "Quick Dress", outfits)
 		if (!initial_outfits || initial_outfits == "" || initial_outfits == "Cancel")
 			return
 

@@ -1014,7 +1014,7 @@
 			var/name = initial(mut.name)
 			options[dna.check_mutation(mut) ? "[name] (Remove)" : "[name] (Add)"] = mut
 
-		var/result = input(usr, "Choose mutation to add/remove","Mutation Mod") as null|anything in sortList(options)
+		var/result = tgui_input_list(usr, "Choose mutation to add/remove","Mutation Mod", sortList(options))
 		if(result)
 			if(result == "Clear")
 				dna.remove_all_mutations()
@@ -1034,7 +1034,7 @@
 			var/qname = initial(T.name)
 			options[has_quirk(T) ? "[qname] (Remove)" : "[qname] (Add)"] = T
 
-		var/result = input(usr, "Choose quirk to add/remove","Quirk Mod") as null|anything in sortList(options)
+		var/result = tgui_input_list(usr, "Choose quirk to add/remove","Quirk Mod", sortList(options))
 		if(result)
 			if(result == "Clear")
 				for(var/datum/quirk/q in roundstart_quirks)
@@ -1072,7 +1072,7 @@
 	if(href_list[VV_HK_SET_SPECIES])
 		if(!check_rights(R_SPAWN))
 			return
-		var/result = input(usr, "Please choose a new species","Species") as null|anything in GLOB.species_list
+		var/result = tgui_input_list(usr, "Please choose a new species","Species", GLOB.species_list)
 		if(result)
 			var/newtype = GLOB.species_list[result]
 			admin_ticket_log("[key_name_admin(usr)] has modified the bodyparts of [src] to [result]")
@@ -1428,7 +1428,7 @@
 	var/undershirt_button = underwear_visibility & UNDERWEAR_HIDE_SHIRT ? "Show shirt" : "Hide shirt"
 	var/socks_button = underwear_visibility & UNDERWEAR_HIDE_SOCKS ? "Show socks" : "Hide socks"
 	var/list/choice_list = list("[underwear_button]" = 1,"[undershirt_button]" = 2,"[socks_button]" = 3,"Show all" = 4, "Hide all" = 5)
-	var/picked_visibility = input(src, "Choose visibility setting", "Show/Hide underwear") as null|anything in choice_list
+	var/picked_visibility = tgui_input_list(src, "Choose visibility setting", "Show/Hide underwear", choice_list)
 	if(picked_visibility)
 		var/picked_choice = choice_list[picked_visibility]
 		switch(picked_choice)
@@ -1448,7 +1448,7 @@
 /mob/living/carbon/human/revive(full_heal = 0, admin_revive = 0)
 	if(..())
 		if(dna && dna.species)
-			dna.species.spec_revival(src) 
+			dna.species.spec_revival(src)
 
 /mob/living/carbon/human/verb/toggle_mutant_part_visibility()
 	set category = "IC"
