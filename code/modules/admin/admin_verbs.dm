@@ -601,7 +601,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	if(!SStrading_card_game.loaded)
 		message_admins("The card subsystem is not currently loaded")
 		return
-	var/pack = input("Which pack should we test?", "You fucked it didn't you") as null|anything in sortList(SStrading_card_game.card_packs)
+	var/pack = tgui_input_list("Which pack should we test?", "You fucked it didn't you", sortList(SStrading_card_game.card_packs))
 	var/batchCount = input("How many times should we open it?", "Don't worry, I understand") as null|num
 	var/batchSize = input("How many cards per batch?", "I hope you remember to check the validation") as null|num
 	var/guar = input("Should we use the pack's guaranteed rarity? If so, how many?", "We've all been there. Man you should have seen the old system") as null|num
@@ -621,7 +621,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	var/type_length = length_char("/obj/effect/proc_holder/spell") + 2
 	for(var/A in GLOB.spells)
 		spell_list[copytext_char("[A]", type_length)] = A
-	var/obj/effect/proc_holder/spell/S = input("Choose the spell to give to that guy", "ABRAKADABRA") as null|anything in sortList(spell_list)
+	var/obj/effect/proc_holder/spell/S = tgui_input_list(usr, "Choose the spell to give to that guy", "ABRAKADABRA", sortList(spell_list))
 	if(!S)
 		return
 
@@ -642,7 +642,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	set desc = "Remove a spell from the selected mob."
 
 	if(T?.mind)
-		var/obj/effect/proc_holder/spell/S = input("Choose the spell to remove", "NO ABRAKADABRA") as null|anything in sortList(T.mind.spell_list)
+		var/obj/effect/proc_holder/spell/S = tgui_input_list(usr, "Choose the spell to remove", "NO ABRAKADABRA", sortList(T.mind.spell_list))
 		if(S)
 			T.mind.RemoveSpell(S)
 			log_admin("[key_name(usr)] removed the spell [S] from [key_name(T)].")
@@ -656,7 +656,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	if(!istype(T))
 		to_chat(src, "<span class='notice'>You can only give a disease to a mob of type /mob/living.</span>", confidential = TRUE)
 		return
-	var/datum/disease/D = input("Choose the disease to give to that guy", "ACHOO") as null|anything in sortList(SSdisease.diseases, /proc/cmp_typepaths_asc)
+	var/datum/disease/D = tgui_input_list(usr, "Choose the disease to give to that guy", "ACHOO", sortList(SSdisease.diseases, /proc/cmp_typepaths_asc))
 	if(!D)
 		return
 	T.ForceContractDisease(new D, FALSE, TRUE)
