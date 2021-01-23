@@ -556,8 +556,8 @@
 				def_value = old_objective.name
 
 		//Following is old input, kept here because of the def_value being used, maybe unneeded, lets see
-		//var/selected_type = input("Select objective type:", "Objective type", def_value) as null|anything in GLOB.admin_objective_list
-		var/selected_type = tgui_input_list(usr, "Select objective type:", "Objective type", def_value, GLOB.admin_objective_list)
+		//var/selected_type = tgui_input_list("Select objective type:", "Objective type", def_value, GLOB.admin_objective_list)
+		var/selected_type = tgui_input_list(usr, "Select objective type:", "Objective type", GLOB.admin_objective_list)
 		selected_type = GLOB.admin_objective_list[selected_type]
 		if (!selected_type)
 			return
