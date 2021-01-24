@@ -13,7 +13,7 @@
 		message_admins("<span class='adminnotice'>[key_name_admin(usr)] has disabled anonymous names.</span>")
 		return
 	var/list/names = list("Cancel", ANON_RANDOMNAMES, ANON_EMPLOYEENAMES)
-	var/result = input(usr, "Choose an anonymous theme","going dark") as null|anything in names
+	var/result = tgui_input_list(usr, "Choose an anonymous theme", "going dark", names)
 	if(!usr || !result || result == "Cancel")
 		return
 	if(SSticker.current_state > GAME_STATE_PREGAME)
